@@ -59,7 +59,7 @@ The typical workflow for processing a single source data part (e.g., `merged_par
 
 ### Post-vertex intra-IceCube segment
 ![alt text](image-3.png)  
-![alt text](image-5.png)  
+![alt text](image-5.png)
 ![alt text](image-4.png)  
 
 ---
