@@ -1,6 +1,7 @@
 from typing import ClassVar, List, Tuple
 from IcePack.PMTfication.Layout.SourceLayout import SourceLayout
 
+
 class CorsikaLayout(SourceLayout):
     family: str = "Corsika"
     pulsemap_table_name: str = "SRTInIcePulses"
@@ -21,7 +22,7 @@ class CorsikaLayout(SourceLayout):
         (9, "0009000-0009999"),
     ]
 
-    alias: int   # instance attribute
+    alias: int  # instance attribute
     subdir: str  # instance attribute
 
     def get_N_events_per_shard(self) -> int:
@@ -30,7 +31,9 @@ class CorsikaLayout(SourceLayout):
     @classmethod
     def from_alias_and_subdir(cls, alias: int, subdir: str) -> "CorsikaLayout":
         if (alias, subdir) not in cls.subdirs:
-            raise ValueError(f"Unknown alias-subdir pair ({alias}, '{subdir}') for CorsikaLayout")
+            raise ValueError(
+                f"Unknown alias-subdir pair ({alias}, '{subdir}') for CorsikaLayout"
+            )
         return cls(alias=alias, subdir=subdir)
 
     @classmethod
@@ -40,5 +43,8 @@ class CorsikaLayout(SourceLayout):
                 return cls(alias=a, subdir=s)
         raise ValueError(f"No subdir found for alias {alias}")
 
+
 # create all instances
-CorsikaLayout.layouts = [CorsikaLayout.from_alias(a) for a, _ in CorsikaLayout.subdirs]
+CorsikaLayout.layouts = [
+    CorsikaLayout.from_alias(a) for a, _ in CorsikaLayout.subdirs
+]

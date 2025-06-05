@@ -75,12 +75,15 @@ class PMTfier:
 
         self.pulsemap_table_name = source_layout.pulsemap_table_name
         self.truth_table_name = source_layout.truth_table_name
-        self.HighestEInIceParticle_table_name = source_layout.highest_E_in_ice_particle_table_name
-        self.HE_dauther_table_name = source_layout.highest_E_daughter_table_name
+        self.HighestEInIceParticle_table_name = (
+            source_layout.highest_E_in_ice_particle_table_name
+        )
+        self.HE_dauther_table_name = (
+            source_layout.highest_E_daughter_table_name
+        )
         self.MC_weight_dict_table_name = source_layout.mc_weight_table_name
         self.N_events_per_shard = source_layout.get_N_events_per_shard()
         self.summary_mode = summary_mode
-
 
     def __call__(self, part_no: int) -> None:
         source_part_file = os.path.join(

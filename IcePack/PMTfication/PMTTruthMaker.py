@@ -348,17 +348,17 @@ class PMTTruthMaker:
     # --------- NAN REPLACEMENTS ---------
     def _build_nan_replacement(self) -> None:
         self._nan_replacement_TRUTH = {}  # assumption: no NaNs in TRUTH
-        self._nan_replacement_GNLabel =  PMTTruthEntity.get_nan_replacements(
+        self._nan_replacement_GNLabel = PMTTruthEntity.get_nan_replacements(
             "GNLabel"
         )
         self._nan_replacement_HighestEInIceParticle = (
-             PMTTruthEntity.get_nan_replacements("HighestEInIceParticle")
+            PMTTruthEntity.get_nan_replacements("HighestEInIceParticle")
         )
-        self._nan_replacement_HE_DAUGHTER = PMTTruthEntity.get_nan_replacements(
-            "HE_DAUGHTER"
+        self._nan_replacement_HE_DAUGHTER = (
+            PMTTruthEntity.get_nan_replacements("HE_DAUGHTER")
         )
-        self._nan_replacement_MCWeightDict = PMTTruthEntity.get_nan_replacements(
-            "MCWeightDict"
+        self._nan_replacement_MCWeightDict = (
+            PMTTruthEntity.get_nan_replacements("MCWeightDict")
         )
 
     # --------- QUERY BUILDERS ---------

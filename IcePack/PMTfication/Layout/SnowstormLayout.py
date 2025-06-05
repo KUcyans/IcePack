@@ -1,4 +1,7 @@
-from IcePack.PMTfication.Layout.SourceLayout import FlavouredSourceLayout, FlavouredLayoutInfo
+from IcePack.PMTfication.Layout.SourceLayout import (
+    FlavouredSourceLayout,
+    FlavouredLayoutInfo,
+)
 from IcePack.Enum.Flavour import Flavour
 from IcePack.Enum.EnergyRange import EnergyRange
 from typing import ClassVar, List
@@ -42,7 +45,10 @@ class SnowstormLayout(FlavouredSourceLayout):
     @classmethod
     def from_flavour_energy(cls, flavour: Flavour, energy_range: EnergyRange):
         for layout in cls.layouts:
-            if layout.flavour == flavour and layout.energy_range == energy_range:
+            if (
+                layout.flavour == flavour
+                and layout.energy_range == energy_range
+            ):
                 return layout
         return None
 
@@ -51,47 +57,65 @@ class SnowstormLayout(FlavouredSourceLayout):
 SnowstormLayout.layouts = [
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22013", flavour=Flavour.E, energy_range=EnergyRange.ER_100_GEV_10_TEV
+            subdir="22013",
+            flavour=Flavour.E,
+            energy_range=EnergyRange.ER_100_GEV_10_TEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22010", flavour=Flavour.MU, energy_range=EnergyRange.ER_100_GEV_10_TEV
+            subdir="22010",
+            flavour=Flavour.MU,
+            energy_range=EnergyRange.ER_100_GEV_10_TEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22016", flavour=Flavour.TAU, energy_range=EnergyRange.ER_100_GEV_10_TEV
+            subdir="22016",
+            flavour=Flavour.TAU,
+            energy_range=EnergyRange.ER_100_GEV_10_TEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22014", flavour=Flavour.E, energy_range=EnergyRange.ER_10_TEV_1_PEV
+            subdir="22014",
+            flavour=Flavour.E,
+            energy_range=EnergyRange.ER_10_TEV_1_PEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22011", flavour=Flavour.MU, energy_range=EnergyRange.ER_10_TEV_1_PEV
+            subdir="22011",
+            flavour=Flavour.MU,
+            energy_range=EnergyRange.ER_10_TEV_1_PEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22017", flavour=Flavour.TAU, energy_range=EnergyRange.ER_10_TEV_1_PEV
+            subdir="22017",
+            flavour=Flavour.TAU,
+            energy_range=EnergyRange.ER_10_TEV_1_PEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22015", flavour=Flavour.E, energy_range=EnergyRange.ER_1_PEV_100_PEV
+            subdir="22015",
+            flavour=Flavour.E,
+            energy_range=EnergyRange.ER_1_PEV_100_PEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22012", flavour=Flavour.MU, energy_range=EnergyRange.ER_1_PEV_100_PEV
+            subdir="22012",
+            flavour=Flavour.MU,
+            energy_range=EnergyRange.ER_1_PEV_100_PEV,
         )
     ),
     SnowstormLayout(
         layout_info=FlavouredLayoutInfo(
-            subdir="22018", flavour=Flavour.TAU, energy_range=EnergyRange.ER_1_PEV_100_PEV
+            subdir="22018",
+            flavour=Flavour.TAU,
+            energy_range=EnergyRange.ER_1_PEV_100_PEV,
         )
     ),
 ]

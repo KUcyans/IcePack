@@ -3,6 +3,7 @@ from typing import Optional
 from IcePack.Enum.EnergyRange import EnergyRange
 from IcePack.Enum.Flavour import Flavour
 
+
 class SourceLayout(BaseModel):
     family: str
     pulsemap_table_name: str
@@ -21,7 +22,9 @@ class SourceLayout(BaseModel):
             raise ValueError(f"Invalid file name format: {filename}")
 
     def get_N_events_per_shard(self) -> int:
-        raise NotImplementedError("Subclasses must implement get_N_events_per_shard()")
+        raise NotImplementedError(
+            "Subclasses must implement get_N_events_per_shard()"
+        )
 
 
 class FlavouredLayoutInfo(BaseModel):

@@ -16,25 +16,13 @@
 IcePack is a Python-based toolkit designed for processing, preparing, and managing simulation data from the IceCube neutrino observatory. It provides a suite of tools to convert pulse-wise data to PhotoMultiplier Tube (PMT)-wise summarised data for analysis or machine learning with heavy computations. This includes not only the summarisation module(PMTfication) but also the data selection based on truth label(EventFilter) and mixing of data from various sources or energy regimes(EventBlender). The whole package is designed based on the [SnowStorm MC data- not public, IceCube account needed :/](https://wiki.icecube.wisc.edu/index.php/SnowStorm_MC#File_Locations). See this illustration of the data storage format.  
 ![alt text](image.png)
 
----
-
-## Key Features
-
-- **PMTfication**: Transforms raw pulsemap data (typically from detector simulations) into summarised PMT-wise features.  
-- **Advanced Event Filtering**: Provides a flexible framework to select events based on physics or geometric criteria (e.g., interaction type, detector containment).  
-- **Data Blending**: Merges and reorganises distinct datasets (e.g., low-energy and high-energy simulations), ensuring consistency between truth information and PMT data.  
-- **Layout Abstraction**: Adapts to different source data formats and structures via a configurable "Layout" system.  
-- **Output Formats**: Uses Apache Parquet primarily for storing processed data, ensuring efficiency and compatibility with modern data analysis tools.
-- **Flavour and Energy Range**: Supports event classification by flavour (e.g., electron, muon, tau) and energy range, facilitating targeted analyses.
-
----
 
 ## Modules Overview
 
 IcePack consists of several core modules:
 
 - **IcePack/PMTfication/**  
-  Converts raw simulation pulsemaps (often stored in SQLite databases) into per-PMT summarised features and generates extensive truth tables linking events to ground truth and derived labels.  
+  Converts raw simulation pulsemaps (stored in SQLite databases) into PMT-wise summarised features and generates extensive truth tables linking events to ground truth and derived labels.  
   Key class: `PMTfier`  
   *(See IcePack/PMTfication/README.md for details)*
 
@@ -142,3 +130,18 @@ This project uses `black` and `flake8` for formatting and linting. Git hooks are
 [![Apache Licensed](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
 
 ---
+You find this project useful?
+Please consider giving it a star on GitHub!
+and cite it in your publications as:
+
+```bibtex
+@software{5:IcePack,
+  title = {IcePack: IceCube PMT-wise Aggregation and Compression Kit},
+  author = {Cyan Jo, Luc Voorend},
+  url = {https://github.com/KUcyans/IcePack/tree/main},
+  version = {0.2.0},
+  date = {2025-05-18},
+  license = {Apache-2.0},
+  type = {software},
+}
+```
