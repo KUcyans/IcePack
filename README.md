@@ -135,7 +135,7 @@ Please consider giving it a star on GitHub!
 and cite it in your publications as:
 
 ```bibtex
-@software{5:IcePack,
+@software{IcePack,
   title = {IcePack: IceCube PMT-wise Aggregation and Compression Kit},
   author = {Cyan Jo, Luc Voorend},
   url = {https://github.com/KUcyans/IcePack/tree/main},
