@@ -46,6 +46,7 @@ from typing import List
 
 import pyarrow as pa
 import pyarrow.parquet as pq
+import json
 
 import logging
 
@@ -62,7 +63,8 @@ class PMTfier:
     def __init__(
         self,
         source_root: str,
-        source_layout: SourceLayout,
+        source_layout: SourceLayout,  # File storage layout
+        source_table_config_file: str, # sql database table configuration
         dest_root: str,
         summary_mode: SummaryMode = SummaryMode.CLASSIC,
     ) -> None:
@@ -73,17 +75,11 @@ class PMTfier:
         self.source_subdirectory = source_layout.subdir
         self.subdir_tag = self._get_subdir_tag()
 
-        self.pulsemap_table_name = source_layout.pulsemap_table_name
-        self.truth_table_name = source_layout.truth_table_name
-        self.HighestEInIceParticle_table_name = (
-            source_layout.highest_E_in_ice_particle_table_name
-        )
-        self.HE_dauther_table_name = (
-            source_layout.highest_E_daughter_table_name
-        )
-        self.MC_weight_dict_table_name = source_layout.mc_weight_table_name
         self.N_events_per_shard = source_layout.get_N_events_per_shard()
         self.summary_mode = summary_mode
+        
+        self.table_config = self.load_table_config(source_table_config_file)
+        self.source_table = self.table_config.get("pulsemap", {}).get("name", "SRTInIcePulses")
 
     def __call__(self, part_no: int) -> None:
         source_part_file = os.path.join(
@@ -212,7 +208,7 @@ class PMTfier:
         # PMTSummariser is the core class to be called for PMTfication
         pa_pmtfied = PMTSummariser(
             con_source=con_source,
-            pulsemap_table_name=self.pulsemap_table_name,
+            source_table=self.source_table,
             event_no_subset=event_batch,
             summary_mode=self.summary_mode,
         )()
@@ -247,7 +243,7 @@ class PMTfier:
         truth_shards = []
 
         event_no_batches = self._get_event_no_batches(
-            con_source, self.pulsemap_table_name, self.N_events_per_shard
+            con_source, self.source_table, self.N_events_per_shard
         )
         for shard_no, event_batch in enumerate(event_no_batches, start=1):
             start_time = time.time()
@@ -291,11 +287,7 @@ class PMTfier:
 
         truth_maker = PMTTruthMaker(
             con_source=con_source,
-            pulsemap_table_name=self.pulsemap_table_name,
-            truth_table_name=self.truth_table_name,
-            HighestEInIceParticle_table_name=self.HighestEInIceParticle_table_name,
-            HE_dauther_table_name=self.HE_dauther_table_name,
-            MC_weight_dict_table_name=self.MC_weight_dict_table_name,
+            table_config=self.table_config,
         )
 
         consolidated_truth = self._divide_and_conquer_part(
@@ -358,3 +350,12 @@ class PMTfier:
             if os.path.isfile(full_path) and file.endswith(".parquet"):
                 total += os.path.getsize(full_path)
         return total / (1024 * 1024)
+    
+    
+    def load_table_config(self, config_path: str) -> dict:
+        if not os.path.isfile(config_path):
+            raise FileNotFoundError(f"Table configuration file not found: {config_path}")
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+            table_config = config.get("tables", {})
+            return table_config

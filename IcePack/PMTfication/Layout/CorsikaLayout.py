@@ -4,11 +4,6 @@ from IcePack.PMTfication.Layout.SourceLayout import SourceLayout
 
 class CorsikaLayout(SourceLayout):
     family: str = "Corsika"
-    pulsemap_table_name: str = "SRTInIcePulses"
-    truth_table_name: str = "Truth"
-    highest_E_in_ice_particle_table_name: str = "GNHighestEInIceParticle"
-    highest_E_daughter_table_name: str = "GNHighestEDaughter"
-    mc_weight_table_name: str = "MCWeightDict"
 
     # list of (alias_int, subdir) pairs
     subdirs: ClassVar[List[Tuple[int, str]]] = [

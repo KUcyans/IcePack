@@ -6,11 +6,6 @@ from IcePack.Enum.Flavour import Flavour
 
 class SourceLayout(BaseModel):
     family: str
-    pulsemap_table_name: str
-    truth_table_name: str
-    highest_E_in_ice_particle_table_name: str
-    highest_E_daughter_table_name: str
-    mc_weight_table_name: str
 
     def get_db_file_name(self, file_idx: int) -> str:
         return f"merged_part_{int(file_idx)}.db"

@@ -9,12 +9,6 @@ from typing import ClassVar, List
 
 class SnowstormLayout(FlavouredSourceLayout):
     family: str = "Snowstorm"
-    pulsemap_table_name: str = "SRTInIcePulses"
-    truth_table_name: str = "truth"
-    highest_E_in_ice_particle_table_name: str = "GNHighestEInIceParticle"
-    highest_E_daughter_table_name: str = "GNHighestEDaughter"
-    mc_weight_table_name: str = "MCWeightDict"
-
     layout_info: FlavouredLayoutInfo  # must be this, not layout_data
 
     layouts: ClassVar[List["SnowstormLayout"]] = []
