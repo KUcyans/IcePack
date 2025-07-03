@@ -10,33 +10,43 @@ Defines summary modes for IceCube data processing, including classic, geometric,
 (4) Sankthans: Max pulse information added on top of the Geometric features, has 42 features
 """
 
+
 class SummaryMode(Enum):
-    CLASSIC = (0, 'thorsten', 5)
-    SECOND = (1, 'geometric', 5)    # three geometric feature added
-    EQUINOX = (2, 'equinox', 5)     # on top of the geometric features, later charge-time information added
-    SANKTHANS = (3, 'sankthans', 5) # on top of the geometric features, max pulse information added
-    
+    CLASSIC = (0, "thorsten", 5)
+    SECOND = (1, "geometric", 5)  # three geometric feature added
+    EQUINOX = (
+        2,
+        "equinox",
+        5,
+    )  # on top of the geometric features, later charge-time information added
+    SANKTHANS = (
+        3,
+        "sankthans",
+        5,
+    )  # on top of the geometric features, max pulse information added
+
     def __init__(self, index: int, name: str, n_first_pulse_collect: int):
         self._index = index
         self._name = name
         self._n_first_pulse_collect = n_first_pulse_collect
-    
+
     @property
     def index(self) -> int:
         """Return the index of the summary mode."""
         return self._index
+
     # example usage: print(SummaryMode.CLASSIC.index)
-    
+
     def __str__(self) -> str:
         return self._name
-    
+
     @property
     def n_collect(self) -> int:
         """Return the number of first pulses to collect."""
         return self._n_first_pulse_collect
-    
+
     @staticmethod
-    def from_index(index: int) -> 'SummaryMode':
+    def from_index(index: int) -> "SummaryMode":
         """Return the summary mode from the index."""
         for mode in SummaryMode:
             if mode.index == index:

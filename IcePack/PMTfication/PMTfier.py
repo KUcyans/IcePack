@@ -64,7 +64,7 @@ class PMTfier:
         self,
         source_root: str,
         source_layout: SourceLayout,  # File storage layout
-        source_table_config_file: str, # sql database table configuration
+        source_table_config_file: str,  # sql database table configuration
         dest_root: str,
         summary_mode: SummaryMode = SummaryMode.CLASSIC,
     ) -> None:
@@ -77,9 +77,11 @@ class PMTfier:
 
         self.N_events_per_shard = source_layout.get_N_events_per_shard()
         self.summary_mode = summary_mode
-        
+
         self.table_config = self.load_table_config(source_table_config_file)
-        self.source_table = self.table_config.get("pulsemap", {}).get("name", "SRTInIcePulses")
+        self.source_table = self.table_config.get("pulsemap", {}).get(
+            "name", "SRTInIcePulses"
+        )
 
     def __call__(self, part_no: int) -> None:
         source_part_file = os.path.join(
@@ -350,12 +352,13 @@ class PMTfier:
             if os.path.isfile(full_path) and file.endswith(".parquet"):
                 total += os.path.getsize(full_path)
         return total / (1024 * 1024)
-    
-    
+
     def load_table_config(self, config_path: str) -> dict:
         if not os.path.isfile(config_path):
-            raise FileNotFoundError(f"Table configuration file not found: {config_path}")
-        with open(config_path, 'r') as f:
+            raise FileNotFoundError(
+                f"Table configuration file not found: {config_path}"
+            )
+        with open(config_path, "r") as f:
             config = json.load(f)
             table_config = config.get("tables", {})
             return table_config

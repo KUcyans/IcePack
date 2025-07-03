@@ -33,12 +33,12 @@ def pmtfy_wrap():
     # Layout specifies the structure of the source files and how they should be processed.
     # Table config file specifies the structure of the SQLite database tables.
     # summary mode specifies which set of PMT-wise features shall be extracted.
-    # 
+    #
     source_root = (
         "/lustre/hpc/project/icecube/HE_Nu_Aske_Oct2024/sqlite_pulses/"
     )
     dest_root_base = "/lustre/hpc/project/icecube/HE_Nu_Aske_Oct2024/PMTfied/"
-    
+
     part_no = int(args.part_number)
 
     #   NOTE 2.1 method1: select the layout item directly
@@ -48,7 +48,7 @@ def pmtfy_wrap():
     layout = SnowstormLayout.from_flavour_energy(
         flavour=Flavour.TAU, energy_range=EnergyRange.ER_1_PEV_100_PEV
     )
-    
+
     summary_mode = SummaryMode.from_index(args.summary_mode)
     table_config_path = "/groups/icecube/cyan/factory/IcePACK/IcePack/PMTfication/Layout/TableConfig.json"
     # layout = CorsikaLayout.from_alias(2)
@@ -58,16 +58,15 @@ def pmtfy_wrap():
     log_cofiguration(
         source_root, dest_root_base, layout, summary_mode, part_no
     )
-    
+
     # NOTE 3. instantiate and invoke the PMTfier class with a part number
     PMTfier(
-        source_root=source_root, 
+        source_root=source_root,
         source_layout=layout,
         source_table_config_file=table_config_path,
         dest_root=dest_root_base,
         summary_mode=summary_mode,
     )(part_no=part_no)
-
 
     # NOTE Log the end time
     logging.info(
@@ -77,6 +76,8 @@ def pmtfy_wrap():
 
 
 """------Utility functions for logging and argument parsing-----"""
+
+
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description="PMTfication of a single SQLite database into Parquet files."
@@ -132,7 +133,8 @@ def log_cofiguration(
     logging.info(
         f"Using up to {int(getenv('SLURM_CPUS_PER_TASK', '1'))} workers."
     )
-    
+
+
 def log_end_time(start_time: float):
     end_time = time.time()
     elapsed_time = end_time - start_time
